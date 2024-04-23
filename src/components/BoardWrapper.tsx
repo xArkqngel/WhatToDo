@@ -1,5 +1,6 @@
+import { cn } from "@/lib/utils";
 
-interface BoardWrapperProps {
+interface BoardWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
     id : string;
     children: React.ReactNode;
 }
@@ -22,9 +23,10 @@ const handleMouseLeave = (id:string) => {
     }
 }
 
-function BoardWrapper({id, children}: BoardWrapperProps) {
+function BoardWrapper({id, children, ...rest}: BoardWrapperProps) {
+    const { className } = rest;
   return (
-    <div id={id} className="board-wrapper flex flex-row justify-between items-center" onMouseEnter={() => handleMouseEnter(id)} onMouseLeave={() => handleMouseLeave(id)}>
+    <div id={id} className={cn("board-wrapper flex flex-row justify-between items-center", className)} onMouseEnter={() => handleMouseEnter(id)} onMouseLeave={() => handleMouseLeave(id)}>
         {children}
     </div>
   );

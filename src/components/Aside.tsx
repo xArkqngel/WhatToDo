@@ -19,7 +19,7 @@ function Aside() {
     ]
 
   return (
-    <aside id="aside" className="h-screen w-full bg-slate-100 ">
+    <aside id="aside" className="h-full w-full bg-slate-100 ">
         <div id="name" className="flex items-center pl-4 h-20">
             <Avatar>
                 <div className="w-full h-full bg-foreground text-background flex items-center justify-center font-medium text-2xl">
