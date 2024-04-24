@@ -15,5 +15,8 @@ export type TaskType = {
     id: string;
     title: string;
 };
-
+export type ThemeOptions = {
+    component: JSX.Element;
+    id: Theme;
+};
 export type Theme = 'lumiflex' | 'novatrix' | 'velustro' | 'opulento' | 'tranquiluxe'

@@ -1,8 +1,8 @@
 "use client";
-import { BoardType, Theme } from "@/types/types";
+import { BoardType, Theme, ThemeOptions } from "@/types/types";
 import { Separator } from "./ui/separator";
 import { Ellipsis, Plus } from "lucide-react";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import List from "./List";
 import {
   Lumiflex,
@@ -29,18 +29,34 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+import ThemeOption from "./ThemeOption";
 
 interface BoardProps {
   board: BoardType;
 }
 
-const themes = {
-  lumiflex: <Lumiflex />,
-  novatrix: <Novatrix />,
-  velustro: <Velustro />,
-  opulento: <Opulento />,
-  tranquiluxe: <Tranquiluxe />,
-};
+const themes: ThemeOptions[] = [
+  {
+    component: <Lumiflex />,
+    id: "lumiflex",
+  },
+  {
+    component: <Novatrix />,
+    id: "novatrix",
+  },
+  {
+    component: <Velustro />,
+    id: "velustro",
+  },
+  {
+    component: <Opulento />,
+    id: "opulento",
+  },
+  {
+    component: <Tranquiluxe />,
+    id: "tranquiluxe",
+  },
+]
 
 function Board({ board }: BoardProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -48,7 +64,7 @@ function Board({ board }: BoardProps) {
 
   return (
     <section className="w-full h-full bg-cover relative">
-      {themes[theme] && themes[theme]}
+      {themes.find((t) => t.id === theme)?.component}
       <div className="absolute top-0 left-0 w-full h-[calc(100vh-9.2rem)]">
         <div className="w-full h-20 flex items-center justify-between p-4 bg-slate-800 bg-opacity-80 text-muted">
           <h2 id="board-title" className="font-semibold text-xl">
@@ -111,13 +127,13 @@ const ThemeMenu = ({
   setOpen: Dispatch<SetStateAction<boolean>>;
   setTheme: Dispatch<SetStateAction<Theme>>;
 }) => {
-  const handleClick = (e: any) => {
-    const target = e.target as HTMLElement;
-    if (target.id) {
-      setTheme(target.id as Theme);
-      setOpen(false);
-    }
-  };
+  const [themeAux, setThemeAux] = useState<Theme>();
+
+  useEffect(() => {
+    if (!themeAux) return;
+    setTheme(themeAux);
+    setOpen(false);
+  }, [themeAux]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -126,43 +142,13 @@ const ThemeMenu = ({
           <DialogTitle>Change theme</DialogTitle>
           <DialogDescription asChild>
             <div className="flex justify-center flex-wrap pt-4">
-              <div className="w-1/2 h-36 cursor-pointer relative">
-                <Opulento />
-                <div
-                  id="opulento"
-                  onClick={handleClick}
-                  className="absolute top-0 left-0 size-full hover:bg-slate-200 hover:bg-opacity-80"
-                ></div>
-              </div>
-              <div className="w-1/2 h-36 cursor-pointer relative">
-                <Tranquiluxe />
-                <div
-                  id="tranquiluxe"
-                  onClick={handleClick}
-                  className="absolute top-0 left-0 size-full hover:bg-slate-200 hover:bg-opacity-80"
-                ></div>
-              </div>
-              <div className="w-1/2 h-36 cursor-pointer relative">
-                <Lumiflex />
-                <div
-                  id="lumiflex"
-                  onClick={handleClick}
-                  className="absolute top-0 left-0 size-full hover:bg-slate-200 hover:bg-opacity-80"
-                ></div>
-              </div>
-              <div className="w-1/2 h-36 cursor-pointer relative">
-                <Velustro />
-                <div
-                  id="velustro"
-                  onClick={handleClick}
-                  className="absolute top-0 left-0 size-full hover:bg-slate-200 hover:bg-opacity-80"
-                ></div>
-              </div>
-              <div className="w-1/2 h-36 cursor-pointer relative">
-                <Novatrix />
-                <div id="novatrix"
-                  onClick={handleClick} className="absolute top-0 left-0 size-full hover:bg-slate-200 hover:bg-opacity-80"></div>
-              </div>
+              {themes.map((theme) => (
+                <ThemeOption
+                  key={theme.id}
+                  themeOption={theme}
+                  setTheme={setThemeAux}
+                />
+              ))}
             </div>
           </DialogDescription>
         </DialogHeader>
