@@ -56,18 +56,20 @@ const themes: ThemeOptions[] = [
     component: <Tranquiluxe />,
     id: "tranquiluxe",
   },
-]
+];
 
 function Board({ board }: BoardProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [theme, setTheme] = useState<Theme>(board.theme);
 
   return (
-    <section className="w-full h-full bg-cover relative">
-      {themes.find((t) => t.id === theme)?.component}
+    <section className="w-full h-full bg-cover relative overflow-hidden">
+      <div className=" w-screen h-full absolute">
+        {themes.find((t) => t.id === theme)?.component}
+      </div>
       <div className="absolute top-0 left-0 w-full h-[calc(100vh-9.2rem)]">
         <div className="w-full h-20 flex items-center justify-between p-4 bg-slate-800 bg-opacity-80 text-muted">
-          <h2 id="board-title" className="font-semibold text-xl">
+          <h2 id="board-title" className="pl-2 font-semibold text-xl">
             {board.title}
           </h2>
           <DropdownMenu>
