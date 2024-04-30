@@ -3,10 +3,8 @@
 import Header from "@/components/Header";
 import Aside from "@/components/Aside";
 import { Separator } from "@/components/ui/separator";
-import Board from "@/components/Board";
-import { Novatrix } from "uvcanvas";
 import { useState } from "react";
-import { Theme } from "@/types/types";
+import { Theme } from "@/types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useUserStore } from "@/utils/user";

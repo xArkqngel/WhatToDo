@@ -1,4 +1,4 @@
-import { TaskType } from "@/types/types";
+import { TaskType } from "@/types";
 import BoardWrapper from "./BoardWrapper";
 import BoardOptions from "./BoardOptions";
 import { Ellipsis } from "lucide-react";

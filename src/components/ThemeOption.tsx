@@ -1,4 +1,4 @@
-import { Theme, ThemeOptions } from "@/types/types";
+import { Theme, ThemeOptions } from "@/types";
 import React from "react";
 
 interface ThemeOptionProps {

@@ -1,4 +1,4 @@
-import { ListType, TaskType } from "@/types/types"
+import { ListType, TaskType } from "@/types"
 import { Separator } from "./ui/separator"
 import BoardWrapper from "./BoardWrapper"
 import BoardOptions from "./BoardOptions"

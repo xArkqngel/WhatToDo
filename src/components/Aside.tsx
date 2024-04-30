@@ -1,27 +1,17 @@
-"use client";
 import { Ellipsis, FolderKanban, Plus, Pencil } from "lucide-react";
 import { Avatar } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 import BoardWrapper from "./BoardWrapper";
 import BoardOptions from "./BoardOptions";
-import { useState } from "react";
 import SetUserName from "./SetUserName";
 import { useUserStore } from "@/utils/user";
-
-const name = "Aside";
-const boards = [
-  {
-    id: "1",
-    title: "Tablero 1",
-  },
-  {
-    id: "2",
-    title: "Tablero xsd",
-  },
-];
+import { useBoardsStore } from "@/utils/board";
+import DialogAddBoard from "./DialogAddBoard";
+import Link from "next/link";
 
 function Aside() {
   const { user } = useUserStore();
+  const { boards } = useBoardsStore();
 
   return (
     <aside id="aside" className="h-full w-full bg-slate-100 ">
@@ -40,7 +30,7 @@ function Aside() {
               </SetUserName>
             </BoardOptions>
           </BoardWrapper>
-          <span className="text-xs italic">Gratis</span>
+          <span className="text-xs italic">Free</span>
         </div>
       </div>
 
@@ -51,10 +41,12 @@ function Aside() {
           <BoardWrapper id="0">
             <div className="flex items-center gap-2">
               <FolderKanban />
-              <h2 className="font-bold">Tableros</h2>
+              <h2 className="font-bold">Boards</h2>
             </div>
             <BoardOptions>
-              <Plus size={20} />
+              <DialogAddBoard>
+                <Plus size={20} />
+              </DialogAddBoard>
             </BoardOptions>
           </BoardWrapper>
         </div>
@@ -63,14 +55,14 @@ function Aside() {
         </div>
         <div id="boards-container" className="flex flex-col py-4">
           {boards.map((board) => (
-            <div key={board.id} className="px-4 py-1 hover:bg-slate-400">
+            <Link href={`/board/${board.id}`} key={board.id} className="px-4 py-1 hover:bg-slate-400">
               <BoardWrapper key={board.id} id={board.id}>
                 <h3 className="text-sm">{board.title}</h3>
                 <BoardOptions>
                   <Ellipsis size={16} />
                 </BoardOptions>
               </BoardWrapper>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
