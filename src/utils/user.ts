@@ -6,10 +6,12 @@ type UserStore = {
 }
 
 export const useUserStore = create<UserStore>((set) => ({
-  user: localStorage.getItem('user'),
+  user: typeof localStorage !== 'undefined' ? localStorage.getItem('user') : null,
   setUser: (user) => set(() => {
-    localStorage.setItem('user', user)
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('user', user);
+    }
 
-    return { user: user }
+    return { user: user };
   })
 }))

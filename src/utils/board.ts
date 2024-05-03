@@ -15,12 +15,23 @@ type BoardsStore = {
   trackTime: (listId: string, time: number) => void;
 }
 
+const loadFromLocalStorage = () => {
+  if (typeof localStorage !== 'undefined') {
+    const boardsData = localStorage.getItem('boards');
+    return boardsData ? JSON.parse(boardsData) : [];
+  } else {
+    return [];
+  }
+};
+
 const saveToLocalStorage = (boards: BoardType[]) => {
-  localStorage.setItem('boards', JSON.stringify(boards))
-}
+  if (typeof localStorage !== 'undefined') {
+    localStorage.setItem('boards', JSON.stringify(boards));
+  }
+};
 
 export const useBoardsStore = create<BoardsStore>((set) => ({
-  boards: JSON.parse(localStorage.getItem('boards') || '[]') as BoardType[],
+  boards: loadFromLocalStorage(),
   addBoard: (board) => set(({ boards }) => {
     const newBoards = boards.concat(board)
 
