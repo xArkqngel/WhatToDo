@@ -9,7 +9,7 @@ function Header() {
     <header className="w-full h-16 bg-foreground text-background flex items-center justify-between p-4 gap-1 shadow-lg">
       <Link href={'/'} className='flex gap-1 items-center'>
         <Table2 size={24} />
-        <h1 className="font-medium h-full leading-[1.9rem] text-2xl">Trello</h1>
+        <h1 className="font-medium h-full leading-[1.9rem] text-2xl">WhatToDo</h1>
       </Link>
 
       <Link href="/pomodoro" className="flex gap-1 items-center">
