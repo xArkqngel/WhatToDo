@@ -1,4 +1,4 @@
-import { BoardType, TaskType, ListType} from "@/types/types";
+import { BoardType, TaskType, ListType} from "@/types";
 import { create } from "zustand";
 
 type BoardsStore = {
