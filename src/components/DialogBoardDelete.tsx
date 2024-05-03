@@ -12,7 +12,6 @@ const DialogBoardDelete = ({ open, setOpen, setDelete }: {
   const router = useRouter()
   
   const handleDelete = () => {
-    router.push('/')
     setDelete(true);
     setOpen(false);
   }

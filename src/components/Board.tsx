@@ -9,6 +9,7 @@ import DropdownMenuOptions from "./DropdownMenuOptions";
 import { useBoardsStore } from "@/utils/board";
 import { useDragAndDrop } from "@formkit/drag-and-drop/react";
 import { useRouter } from "next/navigation";
+import DialogAddList from "./DialogAddList";
 
 interface BoardProps {
   params: {
@@ -40,7 +41,6 @@ function Board({ params }: BoardProps) {
       title,
       theme
     }
-
     setBoard(newBoard)
     updateBoard(newBoard)
   }, [title, theme])
@@ -95,24 +95,28 @@ function Board({ params }: BoardProps) {
         </div>
         <Separator />
         <div
-          id="board-content"
-          className="flex flex-row gap-4 p-4 overflow-x-scroll size-full"
-        >
-          {board.lists.map((list) => (
-            <List
-              key={`board-${list.id}-key`}
-              list={list}
-              boardName={board.title}
-            />
-          ))}
-          <div
-            id="add-list"
-            className="min-w-52 h-10 flex items-center justify-between cursor-pointer p-2 rounded-lg bg-gray-200 hover:bg-gray-300"
+            id="board-content"
+            className="flex gap-4 p-4 overflow-x-scroll h-full w-full"
           >
-            <span className="ml-2">Añadir lista</span>
-            <Plus size={20} />
+            <div
+              ref={listsParent}
+              className="flex gap-4"
+            >
+              {lists.map(list => (
+                <List key={list.id} dragStatus={drag} setDragStatus={setDrag} list={list} boardName={board.title} />
+              ))}
+            </div>
+
+            <DialogAddList boardId={board.id}>
+              <div
+                id="add-list"
+                className="min-w-52 h-fit bg-primary rounded-lg p-4 flex justify-between text-primary-foreground hover:opacity-50 cursor-pointer gap-2"
+              >
+                <h3 className="font-semibold">Añadir lista</h3>
+                <Plus />
+              </div>
+            </DialogAddList>
           </div>
-        </div>
       </div>
     </section>
   );
