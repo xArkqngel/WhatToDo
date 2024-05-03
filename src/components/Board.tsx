@@ -10,6 +10,7 @@ import { useBoardsStore } from "@/utils/board";
 import { useDragAndDrop } from "@formkit/drag-and-drop/react";
 import { useRouter } from "next/navigation";
 import DialogAddList from "./DialogAddList";
+import Timer from "./Timer";
 
 interface BoardProps {
   params: {
@@ -80,18 +81,23 @@ function Board({ params }: BoardProps) {
           <h2 id="board-title" className="pl-2 font-semibold text-xl">
             {title}
           </h2>
-          <div className="flex">
-            <DropdownMenuOptions
-              type="board"
-              setTheme={setTheme}
-              setTitle={setTitle}
-              setRemove={setRemove}
-            >
-              <div className="flex items-center p-1 hover:bg-slate-400 hover:bg-opacity-40 rounded-sm cursor-pointer">
-                <Ellipsis size={24} />
+          <div className="flex gap-4">
+              <div className="flex items-center">
+                <Timer lists={lists} />
               </div>
-            </DropdownMenuOptions>
-          </div>
+              <div className="flex">
+                <DropdownMenuOptions
+                  type="board"
+                  setTitle={setTitle}
+                  setTheme={setTheme}
+                  setRemove={setRemove}
+                >
+                  <div className="flex items-center p-1 hover:bg-slate-400 hover:bg-opacity-40 rounded-sm cursor-pointer">
+                    <Ellipsis size={24} />
+                  </div>
+                </DropdownMenuOptions>
+              </div>
+            </div>
         </div>
         <Separator />
         <div

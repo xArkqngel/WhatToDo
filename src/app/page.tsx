@@ -4,58 +4,14 @@ import Header from "@/components/Header";
 import Aside from "@/components/Aside";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
-import { Theme } from "@/types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useUserStore } from "@/utils/user";
 import SetUserName from "@/components/SetUserName";
+import Home from "@/components/Home";
 
-const board = {
-  id: "1",
-  title: "Board title",
-  content: "Board content",
-  theme: "novatrix" as Theme,
-  lists: [
-    {
-      id: "1",
-      title: "List title",
-      tasks: [
-        {
-          id: "1",
-          title: "Task title",
-        },
-        {
-          id: "2",
-          title: "Task 2",
-        },
-        {
-          id: "3",
-          title: "Task title3",
-        },
-      ],
-    },
-    {
-      id: "2",
-      title: "List title",
-      tasks: [
-        {
-          id: "1",
-          title: "Task title",
-        },
-        {
-          id: "2",
-          title: "Task title",
-        },
-        {
-          id: "3",
-          title: "Task title",
-        },
-      ],
-    },
-  ],
-};
 
-export default function Home() {
+export default function HomePage() {
   const { user } = useUserStore();
   const [asideOpen, setAsideOpen] = useState(true);
 
@@ -98,8 +54,7 @@ export default function Home() {
           id="content"
           className={asideOpen ? "w-2/3 lg:w-3/4 xl:w-4/5" : "w-full"}
         >
-          {/**<Board board={board} />**/}
-          estas aqui, debes ir a board/id
+          <Home />
         </div>
       </main>
     </div>
